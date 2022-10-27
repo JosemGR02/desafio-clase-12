@@ -1,0 +1,17 @@
+
+<h2 id="productosTitulo">Productos:</h2>
+<div id="tablaProductos">
+    {{#if productos.length}}
+        {{#each productos}}
+        <div class="producto">
+            <img src='{{  this.imagen }}' alt='{{ this.titulo }}' class="productosImagen">
+            <div class="productosInfo">
+                <h4 class='productosTitulo'> {{ this.titulo }} </h4>
+                <h4 class='productosPrecio'> $ {{ this.precio }} </h4>
+            </div>
+        </div>
+        {{/each}}
+    {{else}}
+        <p id="productosVacios">No se encuentra ningun producto</p>
+    {{/if}}
+</div>

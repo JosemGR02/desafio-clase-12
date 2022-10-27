@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,600;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="/socket.io/socket.io.js" ></script>
+    <title> Desafio-clase12 - Websockets</title>
+</head>
+<body>
+    <main>
+        <div id="nuevoProducto">
+            <h1 id="prodTitulo"> Nuevo producto </h1>
+            <form id="formularioProds">
+                <input type="text" name="title" placeholder="Titulo" class="nuevoProducto_input">
+                <input type="price" name="price" placeholder="Precio" class="nuevoProducto_input">
+                <input type="text" name="img" placeholder="imagen" class="nuevoProducto_input">
+                <button type="submit" id="nuevoProducto_input">Subir</button>
+            </form>
+        </div>
+        <div id="productos">
+        </div>
+        <div id="Mensajeria">
+            <h2 id="chatTitulo"> Mensajeria </h2>
+            <form id="formularioAlias">
+                <input type="text" name="alias" placeholder="Alias">
+                <button type="submit" id="alias_input">Cambiar alias</button>
+            </form>
+            <div id="mostrarChat">
+            </div>
+            <form id="formularioTxt">
+                <input type="text" name="texto" placeholder="Mensaje" id="texto_input">
+                <button type="submit" id="texto_input">Enviar</button>
+            </form>
+
+        </div>
+    </main>
+    <script src="/assets/js/cliente.js" ></script>
+</body>
+</html>
