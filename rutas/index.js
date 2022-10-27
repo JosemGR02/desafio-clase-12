@@ -3,9 +3,9 @@ const rutas = require('express').Router()
 const rutaProductos = require('./user/producto.js')
 const rutaUsuarios = require('./user/usuario.js')
 
-router.use('/productos', rutaProductos)
+rutas.use('/productos', rutaProductos)
 
-router.use('/usuarios', rutaUsuarios)
+rutas.use('/usuarios', rutaUsuarios)
 
 module.exports = rutas
 

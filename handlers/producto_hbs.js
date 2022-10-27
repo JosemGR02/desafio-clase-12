@@ -1,4 +1,4 @@
-const Productos = require('../modelos/producto/prodModelo')
+const Productos = require('../modelos/productos/prodModelo')
 
 const nuevoProducto = async (socket, io, nuevoProd) => {
     await Productos.guardar(nuevoProd)

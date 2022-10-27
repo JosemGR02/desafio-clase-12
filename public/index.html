@@ -13,33 +13,29 @@
     <title> Desafio-clase12 - Websockets</title>
 </head>
 <body>
-    <main>
-        <div id="nuevoProducto">
-            <h1 id="prodTitulo"> Nuevo producto </h1>
-            <form id="formularioProds">
-                <input type="text" name="title" placeholder="Titulo" class="nuevoProducto_input">
-                <input type="price" name="price" placeholder="Precio" class="nuevoProducto_input">
-                <input type="text" name="img" placeholder="imagen" class="nuevoProducto_input">
-                <button type="submit" id="nuevoProducto_input">Subir</button>
-            </form>
+    <div id="nuevoProducto">
+        <h1 id="prodTitulo"> Nuevo producto </h1>
+        <form id="formularioProds">
+            <input type="text" name="title" placeholder="Titulo" class="nuevoProducto_input">
+            <input type="price" name="price" placeholder="Precio" class="nuevoProducto_input">
+            <input type="text" name="img" placeholder="imagen" class="nuevoProducto_input">
+            <button type="submit" id="nuevoProducto_input">Subir</button>
+        </form>
+    </div>
+    <div id="productos"></div>
+    <div id="Mensajeria">
+        <h2 id="chatTitulo"> Mensajeria </h2>
+        <form id="formularioAlias">
+            <input type="text" name="alias" placeholder="Alias">
+            <button type="submit" id="alias_input">Cambiar alias</button>
+        </form>
+        <div id="mostrarChat">
         </div>
-        <div id="productos">
-        </div>
-        <div id="Mensajeria">
-            <h2 id="chatTitulo"> Mensajeria </h2>
-            <form id="formularioAlias">
-                <input type="text" name="alias" placeholder="Alias">
-                <button type="submit" id="alias_input">Cambiar alias</button>
-            </form>
-            <div id="mostrarChat">
-            </div>
-            <form id="formularioTxt">
-                <input type="text" name="texto" placeholder="Mensaje" id="texto_input">
-                <button type="submit" id="texto_input">Enviar</button>
-            </form>
-
-        </div>
-    </main>
+        <form id="formularioTxt">
+            <input type="text" name="texto" placeholder="Mensaje" id="texto_input">
+            <button type="submit" id="texto_input">Enviar</button>
+        </form>
+    </div>
     <script src="/assets/js/cliente.js" ></script>
 </body>
 </html>

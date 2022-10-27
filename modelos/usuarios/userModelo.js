@@ -1,6 +1,6 @@
 const Contenedor = require('../../modelos/contenedor')
 
-class Usuarios extends Contenedor {
+class ContenedorUsuarios extends Contenedor {
 constructor (archivo) {
     super(archivo)
 }
@@ -17,6 +17,6 @@ async getBySocketId(socketId) {
 }
 }
 
-const Usuarios = new Contenedor('Usuarios')
+const Usuarios = new ContenedorUsuarios('Usuarios')
 
 module.exports = Usuarios

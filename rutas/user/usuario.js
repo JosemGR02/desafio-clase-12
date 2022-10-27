@@ -1,6 +1,6 @@
 
 const rutas = require('express').Router()
-const Usuarios = require('../../modelos/usuarios/userModelos')
+const Usuarios = require('../../modelos/usuarios/userModelo')
 
 const obtenerTodosUsuarios = async (solicitud, respuesta, next) => {
     const usuarios = await Usuarios.obtenerTodos()

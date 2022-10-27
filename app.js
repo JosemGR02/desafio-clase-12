@@ -3,12 +3,13 @@
 const express = require('express');
 const { Server: ServidorHttp } = require('http');
 const { Server: ServidorIO } = require('socket.io');
-const rutas = require('./rutas/index')
+const handlebars = require('express-handlebars');
+const rutas = require('./rutas/index');
 
 
-const { usuarioConectado, usuarioDesconectado, usuarioCambioAlias } = require('./handlers/user.handler')
-const { nuevoMensaje } = require('./handlers/mensaje_hbs.js')
-const { nuevoProducto } = require('./handlers/mensaje_hbs.js')
+const { usuarioConectado, usuarioDesconectado, usuarioCambioAlias } = require('./handlers/usuario_hbs')
+const { nuevoMensaje } = require('./handlers/mensaje_hbs')
+const { nuevoProducto } = require('./handlers/producto_hbs')
 
 
 const PORT = process.env.PORT || 8080;
@@ -28,22 +29,22 @@ app.set("view engine", "hbs");
 app.set("views", "./views");
 
 
+//Ruta
+app.use('/api', rutas)
+
+
+//Servidor
+servidorHttp.listen(PORT, () => { console.log(`Server running on port: ${PORT}`) })
+
+
+
+// EVENTOS
 
 //conexion usuarios
 io.on('connection', socket => {
     usuarioConectado(socket, io)
 })
 
-
-//Rutas
-app.use('/api', rutas)
-
-//Servidor
-httpServer.listen(PORT, () => { console.log(`Server running on port: ${PORT}`) })
-
-
-
-// EVENTOS
 
 // Evento disconnect 
 socket.on('disconnect', reason => {

@@ -1,6 +1,6 @@
 const dayjs = require('dayjs')
 const customParseFormat = require('dayjs/plugin/customParseFormat')
-const Mensajes = require('../models/message/message.model')
+const Mensajes = require('../modelos/mensajes/msjModelo')
 
 dayjs.extend(customParseFormat)
 

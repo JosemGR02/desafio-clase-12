@@ -1,6 +1,6 @@
 
 const rutas = require('express').Router()
-const Productos = require('../../modelos/producto/prodmModelo')
+const Productos = require('../../modelos/productos/prodModelo')
 
 
 const obtenerTodosProds = async (solicitud, respuesta, next) => {

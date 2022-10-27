@@ -1,7 +1,7 @@
 
-const Mensajes = require('../modelos/mensaje/msjModelo')
-const Productos = require('../modelos/producto/prodModelo')
-const Usuarios = require('../modelos/usuario/userModelo')
+const Mensajes = require('../modelos/mensajes/msjModelo')
+const Productos = require('../modelos/productos/prodModelo')
+const Usuarios = require('../modelos/usuarios/userModelo')
 
 const usuarioConectado = async (socket, io) => {
     console.log("Usuario conectado: ", socket.id)
