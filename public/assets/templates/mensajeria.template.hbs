@@ -1,0 +1,12 @@
+
+<h2 id="mensajeriaTitulo">Mensajeria:</h2>
+<div id="tablaMensajes">
+    {{#if mensajes.length}}
+        {{#each mensajes}}
+        <div class="mensajeria">
+            <p>{{ this.mensajes }}</p>
+            <p>{{ this.createDate }}</p>
+        </div>
+        {{/each}}
+    {{/if}}
+</div>

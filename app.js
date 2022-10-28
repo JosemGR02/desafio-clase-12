@@ -40,32 +40,20 @@ servidorHttp.listen(PORT, () => { console.log(`Server running on port: ${PORT}`)
 
 // EVENTOS
 
-//conexion usuarios
+// conexion usuarios
+
 io.on('connection', socket => {
-    usuarioConectado(socket, io)
+    usuarioConectado(socket)
+
+    socket.on('nuevo producto', nuevoProd => {
+        nuevoProducto(nuevoProd)
+    })
+
+    socket.on('nuevo mensaje', nuevoMsg => {
+        nuevoMensaje(nuevoMsg)
+    })
 })
 
-
-// Evento disconnect 
-socket.on('disconnect', reason => {
-    console.log("reason", reason)
-    usuarioDesconectado(socket, io)
-})
-
-// Evento nuevo mensaje
-socket.on('nuevo mensaje', nuevoMsg => {
-    nuevoMensaje(socket, io, nuevoMsg)
-})
-
-// Evento nuevo alias
-socket.on('nuevo alias', nuevoAlias => {
-    usuarioCambioAlias(socket, io, nuevoAlias)
-})
-
-// Evento nuevo producto 
-socket.on('nuevo producto', nuevoProd => {
-    nuevoProducto(socket, io, nuevoProd)
-})
 
 
 
