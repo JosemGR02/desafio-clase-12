@@ -8,12 +8,11 @@ let productos = []
 
 // formularios
 const productosForm = document.getElementById('formularioProds')
-const aliasForm = document.getElementById('formularioAlias')
 const mensajesForm = document.getElementById('formularioTxt')
 
 // contenedores
-const contenedorProds = document.getElementById('productos')
-const mostrarChat = document.getElementById('mostrarChat')
+const contenedorProds = document.getElementById('contenedorProductos')
+const contenedorChat = document.getElementById('contenedorMensajes')
 
 
 // render productos
@@ -32,7 +31,7 @@ const ProductosRenderizados = async (productos) => {
 // render mensajeria
 
 const limpiarChat = () => {
-    mostrarChat.innerHTML = ""
+    contenedorChat.innerHTML = ""
 }
 
 const mensajesRenderizados = async (mensajes) => {
@@ -40,7 +39,7 @@ const mensajesRenderizados = async (mensajes) => {
     const template = await respuesta.text()
     const templateCompilado = Handlebars.compile(template)
     const html = templateCompilado({mensajes})
-    mostrarChat.innerHTML = html
+    contenedorChat.innerHTML = html
 }
 
 

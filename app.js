@@ -7,9 +7,12 @@ const handlebars = require('express-handlebars');
 const rutas = require('./rutas/index');
 
 
-const { usuarioConectado, usuarioDesconectado, usuarioCambioAlias } = require('./handlers/usuario_hbs')
 const { nuevoMensaje } = require('./handlers/mensaje_hbs')
 const { nuevoProducto } = require('./handlers/producto_hbs')
+
+const Mensajes = require('./modelos/mensajes/msjModelo')
+const Productos = require('./modelos/productos/prodModelo')
+
 
 
 const PORT = process.env.PORT || 8080;
@@ -43,7 +46,9 @@ servidorHttp.listen(PORT, () => { console.log(`Server running on port: ${PORT}`)
 // conexion usuarios
 
 io.on('connection', socket => {
-    usuarioConectado(socket)
+    console.log('usuario conectado');
+    enviarTodosProds()
+    enviarTodosMsjs()
 
     socket.on('nuevo producto', nuevoProd => {
         nuevoProducto(nuevoProd)
@@ -56,5 +61,13 @@ io.on('connection', socket => {
 
 
 
+const enviarTodosProds = async (socket) =>{
+    const todosProds = await Productos.obtenerTodos()
+    io.sockets.emit('todos los productos', todosProds)
+}
 
+const enviarTodosMsjs = async (socket) =>{
+    const todosMsjs = await Mensajes.obtenerTodos()
+    io.sockets.emit('todos los mensajes', todosMsjs)
+}
 

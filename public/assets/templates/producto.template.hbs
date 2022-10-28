@@ -3,9 +3,9 @@
 <div id="tablaProductos">
     {{#if productos.length}}
         {{#each productos}}
-        <div class="producto">
-            <img src='{{  this.imagen }}' alt='{{ this.titulo }}' class="productosImagen">
-            <div class="productosInfo">
+        <div class="productos">
+            <img src='{{ this.imagen }}' alt='{{ this.titulo }}' class="productosImagen">
+            <div class="infoProds">
                 <h4 class='productosTitulo'> {{ this.titulo }} </h4>
                 <h4 class='productosPrecio'> $ {{ this.precio }} </h4>
             </div>
