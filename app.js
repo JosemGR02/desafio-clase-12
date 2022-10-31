@@ -7,17 +7,24 @@ const handlebars = require('express-handlebars');
 const rutas = require('./rutas/index');
 
 
-const { nuevoMensaje } = require('./handlers/mensaje_hbs')
-const { nuevoProducto } = require('./handlers/producto_hbs')
-
 const Mensajes = require('./modelos/mensajes/msjModelo')
 const Productos = require('./modelos/productos/prodModelo')
+const Usuarios = require('./modelos/usuarios/userModelo')
 
+// daysjs
+const dayjs = require('dayjs')
+const customParseFormat = require('dayjs/plugin/customParseFormat')
+dayjs.extend(customParseFormat)
 
 
 const PORT = process.env.PORT || 8080;
 const app = express();
 app.use(express.static('./public'))
+
+
+// Middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
 // IO
@@ -51,16 +58,20 @@ io.on('connection', socket => {
     enviarTodosMsjs()
 
     socket.on('nuevo producto', nuevoProd => {
-        nuevoProducto(nuevoProd)
+        nuevoProducto(socket, io, nuevoProd)
     })
 
     socket.on('nuevo mensaje', nuevoMsg => {
-        nuevoMensaje(nuevoMsg)
+        nuevoMensaje(socket, io, nuevoMsg)
+    })
+
+    socket.on('cambiar alias', alias => {
+        cambiarAlias(socket, io, alias)
     })
 })
 
 
-
+// enviar todos
 const enviarTodosProds = async (socket) =>{
     const todosProds = await Productos.obtenerTodos()
     io.sockets.emit('todos los productos', todosProds)
@@ -70,4 +81,28 @@ const enviarTodosMsjs = async (socket) =>{
     const todosMsjs = await Mensajes.obtenerTodos()
     io.sockets.emit('todos los mensajes', todosMsjs)
 }
+
+
+
+// nuevo mensaje
+
+const nuevoMensaje = async (socket, io, nuevoMsj) => {
+    const fecha = new Date()
+    const fechaFormateada = dayjs(fecha).format('DD/MM/YYYY hh:mm:ss')
+    console.log("fecha formateada", fechaFormateada)
+    await Mensajes.guardar({ msj: nuevoMsj, createDate: `${fechaFormateada} hs`})
+    
+    const todosMsjs = await Mensajes.obtenerTodos()
+    io.sockets.emit('todos los mensajes', todosMsjs)
+}
+
+
+// nuevo producto
+
+const nuevoProducto = async (socket, io, nuevoProd) => {
+    await Productos.guardar(nuevoProd)
+    const todosProds = await Productos.obtenerTodos()
+    io.sockets.emit('todos los productos', todosProds)
+}
+
 

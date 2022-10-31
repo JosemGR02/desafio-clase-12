@@ -15,10 +15,10 @@
 
     <body>
         <div id="nuevoProducto">
-            <h1 id="prodTitulo"> Nuevo producto </h1>
+            <h1 id="prodTitulo"> Formulario productos </h1>
             <form id="formularioProds">
                 <input type="text" name="titulo" placeholder="Titulo" class="nuevoProd_input">
-                <input type="price" name="precio" placeholder="Precio" class="nuevoProd_input">
+                <input type="number" name="precio" placeholder="Precio" class="nuevoProd_input">
                 <input type="text" name="imagen" placeholder="imagen" class="nuevoProd_input">
                 <button type="submit" id="nuevoProd_input">Subir</button>
             </form>
@@ -26,14 +26,19 @@
         <div id="contenedorProductos"></div>
         
         <div id="Mensajeria">
-            <h2 id="chatTitulo"> Mensajeria </h2>
+            <h1 id="aliasTitulo"> Ingrese un alias </h1>
+            <form id="formularioAlias">
+                <input type="text" name="aliasForm" placeholder="Alias">
+            <button type="submit" id="alias_input">Enviar</button>
+            </form>
+            
+            <h1 id="chatTitulo"> Ingrese un nuevo mensaje </h1>
             <form id="formularioTxt">
                 <input type="text" name="msjForm" placeholder="Mensaje" id="msj_input">
                 <button type="submit" id="msj_input">Enviar</button>
             </form>
         </div>
         <div id="contenedorMensajes"></div>
-
         <script src="/assets/js/cliente.js" ></script>
     </body>
 </html>

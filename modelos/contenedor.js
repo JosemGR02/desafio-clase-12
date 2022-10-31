@@ -12,14 +12,14 @@ class Contenedor{
             console.log(`Error en el constructor: ${error.mensaje}`)
         }
     }
-
+    
     async obtenerDatos(){
     try {
         const datos = await fs.readFile(this.archivoRuta,'utf-8')
         const datosArray = JSON.parse(datos)
         if(datosArray.length)
-        return { newId: datosArray.at(-1).id + 1, data: datosArray }
-        return { newId: 1, data: datosArray}
+        return { nuevoId: datosArray.at(-1).id + 1, datos: datosArray }
+        return { nuevoId: 1, datos: datosArray}
     } 
     catch (error) {
         console.log(`Error, no se pudo leer el archivo: ${error.mensaje}`)

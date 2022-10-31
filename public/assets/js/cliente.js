@@ -9,19 +9,22 @@ let productos = []
 // formularios
 const productosForm = document.getElementById('formularioProds')
 const mensajesForm = document.getElementById('formularioTxt')
+const usuariosForm = document.getElementById('formularioAlias')
 
 // contenedores
 const contenedorProds = document.getElementById('contenedorProductos')
 const contenedorChat = document.getElementById('contenedorMensajes')
 
 
-// render productos
 
+// RENDERS
+
+// render productos
 const limpiarProds = () => {
     contenedorProds.innerHTML = ""
 }
 const ProductosRenderizados = async (productos) => {
-    let respuesta = await fetch('/assets/templates/producto.template')
+    let respuesta = await fetch('/assets/templates/productoTemplate.hbs');
     const template = await respuesta.text()
     const templateCompilado = Handlebars.compile(template)
     const html = templateCompilado({productos})
@@ -29,13 +32,12 @@ const ProductosRenderizados = async (productos) => {
 }
 
 // render mensajeria
-
 const limpiarChat = () => {
     contenedorChat.innerHTML = ""
 }
 
-const mensajesRenderizados = async (mensajes) => {
-    let respuesta = await fetch('/assets/templates/mensajeria.template')
+const mensajesRenderizados = async (mensajes, alias) => {
+    let respuesta = await fetch('/assets/templates/mensajeriaTemplate.hbs');
     const template = await respuesta.text()
     const templateCompilado = Handlebars.compile(template)
     const html = templateCompilado({mensajes})
@@ -46,14 +48,12 @@ const mensajesRenderizados = async (mensajes) => {
 // LISTENERS
 
 // Listeners Productos
-
 productosForm.addEventListener('submit', (evento) => {
     evento.preventDefault()
     const datosFormulario = new FormData(productosForm)
     const valoresFormulario = Object.fromEntries(datosFormulario)
-    crearProdFormulario.reset()
-
-    socket.emit('nuevo producto', valoresFormulario)
+    productosForm.reset();
+    socket.emit('nuevo producto', valoresFormulario);
 })
 
 
@@ -62,24 +62,45 @@ mensajesForm.addEventListener('submit', (evento) => {
     evento.preventDefault()
     const datosFormulario = new FormData(mensajesForm)
     const valoresformulario = Object.fromEntries(datosFormulario)
-    socket.emit('nuevo mensaje', valoresformulario.textMsj)
+    mensajesForm.reset();
+    socket.emit('nuevo mensaje', valoresformulario.msjForm);
 })
 
 
+// Listeners usuarios
+usuariosForm.addEventListener('submit', (evento) => {
+    evento.preventDefault()
+    const datosFormulario = new FormData(usuariosForm)
+    const valoresformulario = Object.fromEntries(datosFormulario)
+    usuariosForm.reset();
+    socket.emit('nuevo alias', String(valoresformulario.aliasForm))
+}) 
+
 // EVENTOS
 
-// Eventos mensajeria
+// Eventos Productos
+socket.on('todos los productos', todosProds => {
+    productos = todosProds
+    limpiarProds()
+    ProductosRenderizados(todosProds)
+})
 
+
+// Eventos mensajeria
 socket.on('todos los mensajes', todosMsgs => {
     mensajes = todosMsgs
     limpiarChat()
     mensajesRenderizados(todosMsgs)
 })
 
-// Eventos Productos
 
-socket.on('todos los productos', todosProds => {
-    productos = todosProds
-    limpiarProds()
-    ProductosRenderizados(todosProds)
+// Eventos usuarios
+socket.on('todos los usuarios', todosUsers => {
+    usuarios = todosUsers
+    limpiarUser()
+    usuariosRenderizados(todosUsers)
 })
+
+
+
+

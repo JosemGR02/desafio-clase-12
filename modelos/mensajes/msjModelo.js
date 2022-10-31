@@ -1,4 +1,4 @@
-const Contenedor = require('../../modelos/contenedor')
+const Contenedor = require('../../modelos/contenedor');
 
 const Mensajes = new Contenedor('Mensajes')
 
